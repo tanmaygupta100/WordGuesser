@@ -1,3 +1,8 @@
+/*
+WordGuesser BETA:
+    Prints every single word based on filters.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -20,18 +25,27 @@ class WordsFilter
             //Loop: For each word in the referenced list:
             for (const string& word : wordList_)
             {
-                counter ++;
-                //If word matches filtering requirements, it is inserted into the back of list:
-                if (word.front() != firstLetter) // List is alphabetical, so stops early when needed.
-                {
-                    break;
-                }
-                if (word.length() == numLetters && word.back() == lastLetter)
-                    // List is not sorted by length or last letters,
-                    // so this check is done together & w/o breaks.
-                {
-                    filteredWords.push_back(word);
-                }
+                    counter++;
+                    // Skip words that don't start with the specified first letter:
+                    if (word.front() < firstLetter)
+                    {
+                        // ASCII Univode comparison.
+                        // "Does first letter of current word occur before the specified first letter?"
+                        continue; // Skip to the next word.
+                    }
+                    else if (word.front() > firstLetter)
+                    {
+                        break; // No need to check further if the first letter exceeds the specified letter.
+                    }
+                    
+                    //Check if the word meets all filtering requirements:
+                        // List is not sorted by length or last letters,
+                        // so this check is done together & w/o breaks.
+                    if (word.front() == firstLetter && word.length() == numLetters && word.back() == lastLetter)
+                    {
+                        //If word matches filtering requirements, it is inserted into the back of list:
+                        filteredWords.push_back(word);
+                    }
             }
             
             cout << "Filtered " << to_string(counter) << " words.\n";
@@ -109,3 +123,20 @@ int main()
     inputFile.close(); // closes the text file.
     return 0; // successful execution.
 }
+
+/*
+SAMPLE OUTPUT:
+____________________________________
+
+Welcome to Wordo the Word Guesser!
+Let's guess your word...
+What is the first letter? > z
+What is the last letter? > o
+How many letters? > 3
+____________________________________
+
+Filtered 370105 words.
+Are any of these your word??
+1. zho
+2. zoo
+*/
