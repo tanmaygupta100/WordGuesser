@@ -1,5 +1,5 @@
 # WordGuesser
-Wordo the Word Guesses guesses YOUR word! Using sorting algorithms to parse through 370k+ words, Wordo uses prompts to guess your chosen word in seconds.
+Wordo the Word Guesser guesses YOUR word! Using sorting algorithms to parse through 370k+ words, Wordo uses prompts to guess your chosen word in seconds.
 
 Objective:
 Efficiently sort through the English vocabulary without wasting performance quality and time.
